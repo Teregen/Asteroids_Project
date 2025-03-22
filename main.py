@@ -7,16 +7,22 @@ from circleshape import CircleShape
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from shot import Shot
 
 
 def main():
     pygame.init() #initialize the pygame library
+
     update_group = pygame.sprite.Group() #create a group to hold all sprites that need to be updated
     draw_group = pygame.sprite.Group() #create a group to hold all sprites that need to be drawn
     asteroids = pygame.sprite.Group() #create a group to hold all asteroids
+    shots = pygame.sprite.Group() #create a group to hold all shots
+
     Player.containers = (update_group, draw_group) #set the containers for the player class
     Asteroid.containers = (draw_group, update_group, asteroids) #set the containers for the asteroid class
     AsteroidField.containers = (update_group,) ##the comma is important, even for only 1 element
+    Shot.containers = (draw_group, update_group, shots) #set the containers for the shot class
+
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #create a window
     dt = 0
     clock = pygame.time.Clock() #create a clock object to track time
